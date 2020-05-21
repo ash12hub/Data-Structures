@@ -16,13 +16,66 @@ Stretch: What if you could only use instances of your Stack class to implement t
 class Queue:
     def __init__(self):
         self.size = 0
-        # self.storage = ?
+        self.storage = Linked_List()
     
     def __len__(self):
-        pass
+        return len(self.storage)
 
     def enqueue(self, value):
-        pass
+        """Adds a value to the end of a Queue"""
+        # return self.storage.append(value)
+        self.storage.add_value(value)
+        
 
     def dequeue(self):
-        pass
+        """Removes a value from the beginning of a Queue"""
+        """
+        if len(self.storage) > 0:
+            self.first = self.storage[0]
+            self.storage.remove(self.storage[0])
+            return self.first
+        else:
+            return None
+        """
+        return self.storage.remove_value()
+
+class Linked_List:
+    def __init__(self, node=None):
+        self.length = 1 if node else 0
+        self.head=node
+        self.tail=node
+    
+    def __len__(self):
+        return self.length
+
+    def add_value(self, value):
+        new_node = List_Node(value, None, None)
+        self.length += 1
+
+        if self.tail:
+            self.tail.next_val = new_node
+            new_node.prev_val = self.tail
+        else:
+            self.head = new_node
+        self.tail = new_node
+
+    def remove_value(self):
+        if self.head:
+            node = self.head
+            if self.head.next_val:
+                self.head = self.head.next_val
+                self.head.prev_val = None
+            else:
+                self.head = None
+                self.tail = None
+            self.length -= 1
+            return node.value
+        else:
+            return None
+        
+
+class List_Node:
+    def __init__(self, value, next_val=None, prev_val=None):
+        self.value = value
+        self.next_val = next_val
+        self.prev_val = prev_val
