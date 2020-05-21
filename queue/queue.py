@@ -79,3 +79,16 @@ class List_Node:
         self.value = value
         self.next_val = next_val
         self.prev_val = prev_val
+
+"""
+When using a Linked List the next and previous values need to be changed when
+adding a new element, whereas, when using an array, the is index automatically
+updated whenever a new value is added or removed from a list. When adding to an
+array, the append() method can be used to add a value to the end. And the
+remove() method can automatically remove a specified value. The [0] index can
+be used to automatically ge the value at the beginning, making it easy to
+remove it. In a Linked List, a value is assigned to a head and when that is
+removed, the next value will have no previous value and that will be the new
+head. When adding a new head, the new node has to be added to the previous
+value of the current head, in order to add it to the beginning.
+"""
