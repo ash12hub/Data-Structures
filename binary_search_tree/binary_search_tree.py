@@ -35,9 +35,9 @@ class BSTNode:
             return True
 
         if self.right is not None and target > self.value:
-            return self.right.contains(value)
+            return self.right.contains(target)
         elif self.left is not None and target < self.value:
-            return self.left.contains(value)
+            return self.left.contains(target)
         else:
             return False
 
@@ -54,36 +54,92 @@ class BSTNode:
     def for_each(self, fn):
         fn(self.value)
 
-        if self.right:
-            self.right.for_each(fn)
-
         if self.left:
             self.left.for_each(fn)
+
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node.left:
+            self.in_order_print(node.left)
+        
+        print(node.value)
+
+        if node.right:
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        next_level = True
+        nodes = []
+        left = None
+        right = None
+        current_node = node
+        print(current_node.value)
+        while next_level:
+            next_level = False
+            if current_node.right:
+                nodes.append(current_node.right)
+                right = current_node.right.value
+                next_level = True
+            if current_node.left:
+                nodes.append(current_node.left)
+                left = current_node.left.value
+                next_level = True
+            if right:
+                print(right)
+            if left:
+                print(left)
+            
+            current_node = nodes[0]
+            del nodes[0]
+            right = None
+            left = None
+            
 
     # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal
+    # in an iterative depth first traversals
     def dft_print(self, node):
-        pass
+        nodes = [node]
+        while len(nodes) > 0:
+            current_node = nodes[-1]
+            del nodes[-1]
+
+            if current_node.left:
+                nodes.append(current_node.left)
+
+            if current_node.right:
+                nodes.append(current_node.right)
+
+            print(current_node.value)
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(node.value)
+
+        if node.left:
+            self.pre_order_dft(node.left)
+
+        if node.right:
+            self.pre_order_dft(node.right)
+
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node.left:
+            self.post_order_dft(node.left)
+
+        if node.right:
+            self.post_order_dft(node.right)
+
+        print(node.value)
